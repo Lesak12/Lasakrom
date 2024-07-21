@@ -8,7 +8,7 @@ pkg update && pkg upgrade -y
 pkg install python3 -y
 ```
 ```bash
-git clone https://github.com/hackerxphantom/xransom
+git clone https://github.com/Lesak12/Lasakrom
 ```
 ```bash
 cd xransom

